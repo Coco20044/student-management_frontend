@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Student Management System</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="app.js" defer></script>
+
+</head>
+
+<body>
+
+    <div class="app-container">
+
+        <aside class="sidebar" id="sidebar">
+
+            <div class="brand">
+
+                <div class="brand-icon">
+
+                    <i data-lucide="graduation-cap"></i>
+
+                </div>
+
+                <span>Student<span class="brand-light">M</span></span>
+
+            </div>
+
+            <div class="sidebar-section">
+
+                <p class="sidebar-label">MENU</p>
+
+                <nav class="sidebar-nav">
+
+                    <a href="#" class="nav-link active" data-page="dashboard">
+
+                        <i data-lucide="layout-dashboard"></i>
+
+                        <span>Dashboard</span>
+
+                    </a>
+
+                    <a href="#" class="nav-link" data-page="students">
+
+                        <i data-lucide="users"></i>
+
+                        <span>All Students</span>
+
+                    </a>
+
+                </nav>
+
+            </div>
+
+            <div class="sidebar-bottom">
+
+                <div class="sidebar-help">
+
+                    <div class="help-icon">
+
+                        <i data-lucide="book-open"></i>
+
+                    </div>
+
+                    <div>
+
+                        <h4>Student Management</h4>
+
+                        <p>Manage your student information in one place.</p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </aside>
+
+        <main class="main-content">
+
+            <header class="topbar">
+
+                <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">
+
+                    <i data-lucide="menu"></i>
+
+                </button>
+
+                <div class="breadcrumb">
+
+                    <span>Workspace</span>
+
+                    <i data-lucide="chevron-right"></i>
+
+                    <strong id="breadcrumbTitle">Dashboard</strong>
+
+                </div>
+
+                <div class="topbar-right">
+
+                    <span class="date-display" id="currentDate"></span>
+
+                    <div class="profile-avatar">SM</div>
+
+                </div>
+
+            </header>
+
+            <div class="page-content">
+
+                <section class="page-section active" id="dashboardPage">
+
+                    <nav class="mobile-page-nav">
+
+                        <a href="#" class="mobile-nav-link active" data-page="dashboard">
+
+                            <i data-lucide="layout-dashboard"></i>
+
+                            <span>Dashboard</span>
+
+                        </a>
+
+                        <a href="#" class="mobile-nav-link" data-page="students">
+
+                            <i data-lucide="users"></i>
+
+                            <span>All Students</span>
+
+                        </a>
+
+                    </nav>
+
+                    <div class="page-heading">
+
+                        <div>
+
+                            <p class="eyebrow">OVERVIEW</p>
+
+                            <h1>Dashboard</h1>
+
+                            <p class="page-description">Here's what's happening with your student records.</p>
+
+                        </div>
+
+                        <button class="primary-button" id="addStudentButton">
+
+                            <i data-lucide="plus"></i>
+
+                            Add Student
+
+                        </button>
+
+                    </div>
+
+                    <div class="stats-grid">
+
+                        <div class="stat-card">
+
+                            <div class="stat-top">
+
+                                <span>Total Students</span>
+
+                                <div class="stat-icon">
+
+                                    <i data-lucide="users"></i>
+
+                                </div>
+
+                            </div>
+
+                            <h2 id="totalStudents">—</h2>
+
+                            <p>Registered students</p>
+
+                        </div>
+
+                        <div class="stat-card">
+
+                            <div class="stat-top">
+
+                                <span>Departments</span>
+
+                                <div class="stat-icon">
+
+                                    <i data-lucide="building-2"></i>
+
+                                </div>
+
+                            </div>
+
+                            <h2 id="totalDepartments">—</h2>
+
+                            <p>Departments represented</p>
+
+                        </div>
+
+                        <div class="stat-card">
+
+                            <div class="stat-top">
+
+                                <span>Courses</span>
+
+                                <div class="stat-icon">
+
+                                    <i data-lucide="book-open"></i>
+
+                                </div>
+
+                            </div>
+
+                            <h2 id="totalCourses">—</h2>
+
+                            <p>Courses represented</p>
+
+                        </div>
+
+                    </div>
+
+                    <section class="content-card">
+
+                        <div class="card-heading">
+
+                            <div>
+
+                                <h2>Recent Students</h2>
+
+                                <p>Recently added student records</p>
+
+                            </div>
+
+                            <button class="text-button" data-page="students">
+
+                                View all
+
+                                <i data-lucide="arrow-right"></i>
+
+                            </button>
+
+                        </div>
+
+                        <div class="table-wrapper">
+
+                            <table>
+
+                                <thead>
+
+                                    <tr>
+
+                                        <th>STUDENT</th>
+
+                                        <th>STUDENT ID</th>
+
+                                        <th>DEPARTMENT</th>
+
+                                        <th>LEVEL</th>
+
+                                        <th>EMAIL</th>
+
+                                    </tr>
+
+                                </thead>
+
+                                <tbody id="recentStudentsTable">
+
+                                    <tr>
+
+                                        <td colspan="5" class="table-message">Loading student records...</td>
+
+                                    </tr>
+
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+                    </section>
+
+                </section>
+
+                <section class="page-section" id="studentsPage">
+
+                    <nav class="mobile-page-nav">
+
+                        <a href="#" class="mobile-nav-link" data-page="dashboard">
+
+                            <i data-lucide="layout-dashboard"></i>
+
+                            <span>Dashboard</span>
+
+                        </a>
+
+                        <a href="#" class="mobile-nav-link active" data-page="students">
+
+                            <i data-lucide="users"></i>
+
+                            <span>All Students</span>
+
+                        </a>
+
+                    </nav>
+
+                    <div class="page-heading">
+
+                        <div>
+
+                            <p class="eyebrow">RECORDS</p>
+
+                            <h1>All Students</h1>
+
+                            <p class="page-description">View and manage all registered students.</p>
+
+                        </div>
+
+                        <button class="primary-button" id="addStudentButton2">
+
+                            <i data-lucide="plus"></i>
+
+                            Add Student
+
+                        </button>
+
+                    </div>
+
+                    <section class="content-card">
+
+                        <div class="student-toolbar">
+
+                            <div>
+
+                                <h2>Student Directory</h2>
+
+                                <p id="studentCount">Loading records...</p>
+
+                            </div>
+
+                            <div class="search-box">
+
+                                <i data-lucide="search"></i>
+
+                                <input type="search" id="studentSearch" placeholder="Search students...">
+
+                            </div>
+
+                        </div>
+
+                        <div class="table-wrapper">
+
+                            <table>
+
+                                <thead>
+
+                                    <tr>
+
+                                        <th>STUDENT</th>
+
+                                        <th>STUDENT ID</th>
+
+                                        <th>DEPARTMENT</th>
+
+                                        <th>COURSE</th>
+
+                                        <th>LEVEL</th>
+
+                                        <th>ACTIONS</th>
+
+                                    </tr>
+
+                                </thead>
+
+                                <tbody id="studentsTable">
+
+                                    <tr>
+
+                                        <td colspan="6" class="table-message">Loading student records...</td>
+
+                                    </tr>
+
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+                    </section>
+
+                </section>
+
+                <section class="page-section" id="studentFormPage">
+
+                    <div class="page-heading">
+
+                        <div>
+
+                            <p class="eyebrow">STUDENT INFORMATION</p>
+
+                            <h1 id="formPageTitle">Add Student</h1>
+
+                            <p class="page-description">Enter the student's information below.</p>
+
+                        </div>
+
+                    </div>
+
+                    <section class="content-card form-card">
+
+                        <form id="studentForm">
+
+                            <div class="form-section-heading">
+
+                                <h2>Personal Information</h2>
+
+                                <p>Basic details about the student.</p>
+
+                            </div>
+
+                            <div class="form-grid">
+
+                                <div class="form-group">
+
+                                    <label for="student_id">Student ID <span>*</span></label>
+
+                                    <input type="text" id="student_id" name="student_id" placeholder="e.g. STU2026001" required>
+
+                                </div>
+
+                                <div class="form-group">
+
+                                    <label for="first_name">First Name <span>*</span></label>
+
+                                    <input type="text" id="first_name" name="first_name" placeholder="Enter first name" required>
+
+                                </div>
+
+                                <div class="form-group">
+
+                                    <label for="last_name">Last Name <span>*</span></label>
+
+                                    <input type="text" id="last_name" name="last_name" placeholder="Enter last name" required>
+
+                                </div>
+
+                                <div class="form-group">
+
+                                    <label for="email">Email Address <span>*</span></label>
+
+                                    <input type="email" id="email" name="email" placeholder="student@example.com" required>
+
+                                </div>
+
+                                <div class="form-group">
+
+                                    <label for="phone">Phone Number</label>
+
+                                    <input type="tel" id="phone" name="phone" placeholder="Enter phone number">
+
+                                </div>
+
+                                <div class="form-group">
+
+                                    <label for="gender">Gender</label>
+
+                                    <select id="gender" name="gender">
+
+                                        <option value="">Select gender</option>
+
+                                        <option value="Male">Male</option>
+
+                                        <option value="Female">Female</option>
+
+                                        <option value="Other">Other</option>
+
+                                    </select>
+
+                                </div>
+
+                                <div class="form-group">
+
+                                    <label for="date_of_birth">Date of Birth</label>
+
+                                    <input type="date" id="date_of_birth" name="date_of_birth">
+
+                                </div>
+
+                            </div>
+
+                            <div class="form-section-heading academic-heading">
+
+                                <h2>Academic Information</h2>
+
+                                <p>Information about the student's studies.</p>
+
+                            </div>
+
+                            <div class="form-grid">
+
+                                <div class="form-group">
+
+                                    <label for="department">Department</label>
+
+                                    <input type="text" id="department" name="department" placeholder="Enter department">
+
+                                </div>
+
+                                <div class="form-group">
+
+                                    <label for="course">Course</label>
+
+                                    <input type="text" id="course" name="course" placeholder="Enter course">
+
+                                </div>
+
+                                <div class="form-group">
+
+                                    <label for="level">Level</label>
+
+                                    <select id="level" name="level">
+
+                                        <option value="">Select level</option>
+
+                                        <option value="100">100 Level</option>
+
+                                        <option value="200">200 Level</option>
+
+                                        <option value="300">300 Level</option>
+
+                                        <option value="400">400 Level</option>
+
+                                        <option value="500">500 Level</option>
+
+                                        <option value="600">600 Level</option>
+
+                                    </select>
+
+                                </div>
+
+                            </div>
+
+                            <div class="form-message" id="formMessage"></div>
+
+                            <div class="form-actions">
+
+                                <button type="button" class="secondary-button" id="cancelFormButton">
+
+                                    Cancel
+
+                                </button>
+
+                                <button type="submit" class="primary-button" id="saveStudentButton">
+
+                                    Save Student
+
+                                </button>
+
+                            </div>
+
+                        </form>
+
+                    </section>
+
+                </section>
+
+                <section class="page-section" id="studentDetailsPage">
+
+                    <div class="page-heading">
+
+                        <div>
+
+                            <p class="eyebrow">STUDENT RECORD</p>
+
+                            <h1>Student Details</h1>
+
+                            <p class="page-description">View the complete student record.</p>
+
+                        </div>
+
+                        <button class="secondary-button" id="backToStudentsButton">
+
+                            <i data-lucide="arrow-left"></i>
+
+                            Back to Students
+
+                        </button>
+
+                    </div>
+
+                    <section class="content-card details-card" id="studentDetailsContent"></section>
+
+                </section>
+
+            </div>
+
+        </main>
+
+    </div>
+
+    <div class="toast" id="toast"></div>
+</body>
+</html>
